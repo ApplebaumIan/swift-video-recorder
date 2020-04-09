@@ -24,8 +24,8 @@ open class Recorder: NSObject {
     private var audioInput: AVAssetWriterInput? = nil
     private var videoInput: AVAssetWriterInput? = nil
     
-    private var startTime: CMTime = kCMTimeInvalid
-    private var duration: CMTime = kCMTimeZero
+	private var startTime: CMTime = CMTime.invalid
+	private var duration: CMTime = CMTime.zero
     
     private var lastVideoSampleBuffer: CMSampleBuffer? = nil
     
@@ -143,8 +143,8 @@ open class Recorder: NSObject {
         do {
             try captureDeviceVideoFront?.lockForConfiguration()
             captureDeviceVideoFront?.activeFormat = suitableFormat!
-            captureDeviceVideoFront?.activeVideoMinFrameDuration = CMTimeMake(1, 25)
-            captureDeviceVideoFront?.activeVideoMaxFrameDuration = CMTimeMake(1, 25)
+			captureDeviceVideoFront?.activeVideoMinFrameDuration = CMTimeMake(value: 1, timescale: 25)
+			captureDeviceVideoFront?.activeVideoMaxFrameDuration = CMTimeMake(value: 1, timescale: 25)
             captureDeviceVideoFront?.unlockForConfiguration()
         } catch {
             print(error)
@@ -206,8 +206,8 @@ open class Recorder: NSObject {
                 videoInput?.markAsFinished()
                 audioInput?.markAsFinished()
                 assetWriter!.endSession(atSourceTime: duration + startTime)
-                startTime = kCMTimeInvalid
-                duration = kCMTimeZero
+				startTime = CMTime.invalid
+				duration = CMTime.zero
                 assetWriter!.finishWriting {
                     DispatchQueue.main.async {
                         for listener in self.videoListeners {
