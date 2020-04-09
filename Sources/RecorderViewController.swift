@@ -23,13 +23,17 @@ open class RecorderViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    override open func viewDidLoad() {
+	func recorderViewSetup() {
+		recorderView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+		recorderView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+		recorderView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+		recorderView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+	}
+	
+	override open func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(recorderView)
-        recorderView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        recorderView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        recorderView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        recorderView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+		recorderViewSetup()
     }
     
     override open func viewWillAppear(_ animated: Bool) {
